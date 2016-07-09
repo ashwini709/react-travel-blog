@@ -1,0 +1,42 @@
+@import (reference) "./responsive.less";
+
+.header-container {
+  position: fixed;
+  height: 45px;
+  width: 100%;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 500;
+  color: white;
+  opacity: 0;
+
+  &.visible {
+    background-color: rgba(42, 69, 218, 0.91);
+    opacity: 1;
+    -webkit-transition: 200ms linear;
+    transition: 200ms linear;
+  }
+
+  .scroll-to-day {
+    color: white;
+    text-decoration: none;
+    margin: 10px;
+    font-size: 14px;
+    display: none;
+    cursor: pointer;
+
+    @media @tablet {
+      display: inline-block;
+    }
+  }
+  .title {
+    display: inline-block;
+
+    @media @tablet {
+      display: none;
+    }
+  }
+}
+
