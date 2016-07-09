@@ -1,13 +1,16 @@
+@import (reference) "./mixins.less";
 @import (reference) "./responsive.less";
 
 .header-container {
+  .align-items(center);
+  .display-flex();
+  .justify-content(center);
+  .transition(200ms linear);
+
   position: fixed;
   height: 45px;
   width: 100%;
   background-color: transparent;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   z-index: 500;
   color: white;
   opacity: 0;
@@ -15,8 +18,6 @@
   &.visible {
     background-color: rgba(42, 69, 218, 0.91);
     opacity: 1;
-    -webkit-transition: 200ms linear;
-    transition: 200ms linear;
   }
 
   .scroll-to-day {
@@ -32,7 +33,9 @@
     }
   }
   .title {
+    cursor: pointer;
     display: inline-block;
+    padding: 13px;
 
     @media @tablet {
       display: none;

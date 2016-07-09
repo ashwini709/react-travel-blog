@@ -7,8 +7,8 @@ import '../styles/header.less';
 class Header extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      counter: 0,
       visible: false
     };
 
@@ -19,7 +19,6 @@ class Header extends React.Component {
 
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
-
     this.handleScroll();
   }
 
@@ -45,7 +44,7 @@ class Header extends React.Component {
   }
 
   render() {
-    const { visible, slideMenuOpen } = this.state;
+    const { visible } = this.state;
 
     return (
       <div className={classNames('header-container', { visible })}>
@@ -56,10 +55,9 @@ class Header extends React.Component {
         <div className='scroll-to-day' onClick={this.scrollToDay.bind(this, 4)} >DAY 4</div>
         <div className='scroll-to-day' onClick={this.scrollToDay.bind(this, 5)} >DAY 5</div>
         <div className='scroll-to-day' onClick={this.scrollToDay.bind(this, 6)} >DAY 6</div>
-
-        <div className='title' onClick={this.scrollToHome.bind(this)}>
-          NEWZEALAND
-        </div>
+        <div className='scroll-to-day' onClick={this.scrollToDay.bind(this, 7)} >DAY 7</div>
+        <div className='scroll-to-day' onClick={this.scrollToDay.bind(this, 8)} >DAY 8</div>
+        <div className='title' onClick={this.scrollToHome.bind(this)}>NEW ZEALAND</div>
       </div>
     );
   }

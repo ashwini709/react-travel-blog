@@ -14,26 +14,19 @@ class Home extends React.Component {
 
   componentDidMount() {
     const height = window.innerHeight;
-
     this.setState({ height });
-  }
-
-  componentWillUnmount() {
   }
 
   render() {
     const { height } = this.state;
-
-    const style = {
-      height
-    };
+    const style = { height };
 
     return (
       <div className="home-container" style={style}>
         <div className="background-container" />
         <div className="title-box">
-          <div className="travel-year">TRAVEL 2016</div>
-          <div className="travel-location">NEWZEALAND</div>
+          <div className="travel-year">MAY 2016</div>
+          <div className="travel-location">NEW ZEALAND</div>
         </div>
       </div>
     );

@@ -14,12 +14,12 @@ var routes = (
   <Router history={browserHistory}>
     <Route path='/' component={App}>
       <IndexRoute component={Home} />
-      <Route path='/day1' component={DayOne} onUpdate={() => window.scrollTo(0, 0)} />
-      <Route path='/day2' component={DayTwo} onUpdate={() => window.scrollTo(0, 0)} />
-      <Route path='/day3' component={DayThree} onUpdate={() => window.scrollTo(0, 0)} />
-      <Route path='/day4' component={DayFour} onUpdate={() => window.scrollTo(0, 0)} />
-      <Route path='/day5' component={DayFive} onUpdate={() => window.scrollTo(0, 0)} />
-      <Route path='/day6' component={DaySix} onUpdate={() => window.scrollTo(0, 0)} />
+      <Route path='/day1' component={DayOne} />
+      <Route path='/day2' component={DayTwo} />
+      <Route path='/day3' component={DayThree} />
+      <Route path='/day4' component={DayFour} />
+      <Route path='/day5' component={DayFive} />
+      <Route path='/day6' component={DaySix} />
     </Route>
   </Router>
 );

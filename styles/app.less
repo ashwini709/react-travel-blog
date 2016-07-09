@@ -1,21 +1,19 @@
+@import (reference) "./mixins.less";
 @import (reference) "./responsive.less";
 
 body {
   margin: 0;
+  font-family: 'HPSimplified-Light';
 }
 
 div {
   box-sizing: border-box;
 }
 
-html, body, #container, .fake-container {
-  width: 100%;
-  height: 100%;
-  font-family: 'HPSimplified-Light';
-}
-
 #container {
-  .app-content {
+  min-width: 320px;
+
+  .fake-container, .app-content {
     width: 100%;
     height: auto;
   }
@@ -23,6 +21,7 @@ html, body, #container, .fake-container {
   .day-background-container {
     background-image: url("../imgs/bg.jpg");
     background-size: cover;
+    background-position: center;
     opacity: 0.2;
     position:fixed;
     width: 100%;
@@ -32,45 +31,52 @@ html, body, #container, .fake-container {
     z-index: 0;
   }
 
-  .day-one-container {
+  .day-container {
     height: 500px;
     width: 100%;
     padding-top: 50px;
     position: relative;
 
     .card-container {
-      display: flex;
+      .display-flex();
+      .flex-direction(column);
       width: 90%;
       height: 90%;
       left: 5%;
       position: relative;
       top: 5%;
       z-index: 5;
+
+      @media @tablet {
+        .flex-direction(initial);
+      }
     }
   }
 
-  .left-container {
+  .photo-container {
+    .display-flex();
+    .justify-content(flex-end);
     width: 100%;
-    display: flex;
+    height: 213px;
+    position: relative;
+    overflow: hidden;
 
     @media @tablet {
       width: 60%;
       height: 100%;
+      flex: 1 0 1px;
     }
-
-    justify-content: flex-end;
-    height: 250px;
-    position: relative;
-    overflow: hidden;
   }
 
-  .right-container {
-    top: 250px;
-    left: 0;
+  .text-container {
+    .display-flex();
+    .flex-direction(column);
+    .justify-content(center);
     width: 100%;
-    height: 250px;
+    height: 270px;
     position: absolute;
     background: white;
+    top: 213px;
 
     &::before {
       background: #fff;
@@ -85,76 +91,56 @@ html, body, #container, .fake-container {
       -o-transform: rotate(45deg);
       width: 24px;
       margin-top: 72px;
+      z-index: 5;
     }
 
     @media @tablet {
       top: 0;
-      display: flex;
-      flex: 1 0 1px;
-      flex-direction: column;
-      justify-content: center;
       position: relative;
       color: black;
+      width: 40%;
       height: 100%;
       max-width: 380px;
+      min-width: 200px;
 
       &::before {
         left: -10px;
         top: 0;
       }
+
+      &.arrow-right::before {
+        left: 96%;
+      }
     }
 
     .title {
       font-size: 24px;
-      font-weight: bold;
+      font-weight: 900;
       text-align: center;
       margin: 5%;
       padding-bottom: 20px;
       border-bottom: 1px solid;
+      color: rgb(42, 69, 218);
+      text-transform: uppercase;
 
-      @media @phone {
-        top: 40px;
-        width: 90%;
-        position: absolute;
-      }
-      @media @phone-landscape {
-        top: 40px;
-        width: 90%;
-        position: absolute;
-      }
       @media @tablet {
         position: relative;
         top: 0;
         width: auto;
       }
-
     }
 
     .description {
       box-sizing: border-box;
-
-      @media @phone {
-        position: absolute;
-        bottom: 3em;
-        left: 0;
-        width: 100%;
-        padding: 10px;
-      }
-
-      @media @phone-landscape {
-        position: absolute;
-        bottom: 3em;
-        left: 0;
-        width: 100%;
-        padding: 10px;
-      }
+      text-align: left;
+      padding: 10px 20px;
+      line-height: 1.5em;
 
       @media @tablet {
         position: relative;
         bottom: 0;
         left: 0;
         width: 100%;
-        padding: 10px;
       }
     }
   }

@@ -6,44 +6,36 @@ class DayOne extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      height: 0
-    };
+    this.state = { height: 0 };
   }
 
   componentDidMount() {
     const height = window.innerHeight;
-
     this.setState({ height });
-  }
-
-  componentWillUnmount() {
   }
 
   render() {
     const { height } = this.state;
-
-    const style = {
-      height
-    };
+    const style = { height };
 
     const images = [
-      "imgs/1/1_1000.JPG",
-      "imgs/1/2_1000.JPG",
-      "imgs/1/3_1000.JPG",
-      "imgs/1/4_1000.JPG",
-      "imgs/1/5_1000.JPG",
-      "imgs/1/6_1000.JPG",
-      "imgs/1/7_1000.JPG"
+      "imgs/1/1.jpg",
+      "imgs/1/2.jpg",
+      "imgs/1/3.jpg",
+      "imgs/1/4.jpg",
+      "imgs/1/5.jpg",
+      "imgs/1/6.jpg",
+      "imgs/1/7.jpg",
+      "imgs/1/8.jpg"
     ];
 
     return (
-      <div className="day-one-container" style={style}>
+      <div className="day-container" style={style}>
         <div className='card-container'>
-          <div className="left-container">
+          <div className="photo-container">
             <ImageGallery items={images} index='1' />
           </div>
-          <div className="right-container">
+          <div className="text-container">
             <div className="title">AUCKLAND</div>
             <div className="description">
               I am Amogh Garg. I am currently living in Tokyo. I love travelling and exploring new places.

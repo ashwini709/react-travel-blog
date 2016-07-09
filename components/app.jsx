@@ -8,6 +8,8 @@ import DayThree from './day-three.jsx';
 import DayFour from './day-four.jsx';
 import DayFive from './day-five.jsx';
 import DaySix from './day-six.jsx';
+import DaySeven from './day-seven.jsx';
+import DayEight from './day-eight.jsx';
 
 import '../styles/app.less';
 
@@ -16,26 +18,17 @@ class App extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = {
-      height: 0
-    };
+    this.state = { height: 0 };
   }
 
   componentDidMount() {
     const height = window.innerHeight;
-
     this.setState({ height });
-  }
-
-  componentWillUnmount() {
   }
 
   render() {
     const { height } = this.state;
-
-    const style = {
-      height
-    };
+    const style = { height };
 
     return (
       <div className="fake-container">
@@ -49,6 +42,8 @@ class App extends React.Component {
           <DayFour />
           <DayFive />
           <DaySix />
+          <DaySeven />
+          <DayEight />
         </div>
       </div>
     );

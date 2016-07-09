@@ -6,45 +6,42 @@ class DaySix extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      height: 0
-    };
+    this.state = { height: 0 };
   }
 
   componentDidMount() {
     const height = window.innerHeight;
-
     this.setState({ height });
-  }
-
-  componentWillUnmount() {
   }
 
   render() {
     const { height } = this.state;
-
-    const style = {
-      height
-    };
+    const style = { height };
 
     const images = [
-      "imgs/6/1_1000.JPG",
-      "imgs/6/2_1000.JPG"
+      "imgs/6/1.jpg",
+      "imgs/6/2.jpg",
+      "imgs/6/3.jpg",
+      "imgs/6/4.jpg",
+      "imgs/6/5.jpg",
+      "imgs/6/6.jpg",
+      "imgs/6/7.jpg",
+      "imgs/6/8.jpg"
     ];
 
     return (
-      <div className="day-one-container" style={style}>
+      <div className="day-container" style={style}>
         <div className='day-background-container' />
         <div className='card-container'>
-          <div className="left-container">
-            <ImageGallery items={images} index='6' />
-          </div>
-          <div className="right-container">
-            <div className="title">AUCKLAND</div>
+          <div className="text-container arrow-right">
+            <div className="title">Mount Cook National Park</div>
             <div className="description">
               I am Amogh Garg. I am currently living in Tokyo. I love travelling and exploring new places.
               I also like to spend my time reading nowel or doing nothing. And yes, I am a huge 9gager.
             </div>
+          </div>
+          <div className="photo-container">
+            <ImageGallery items={images} index='6' />
           </div>
         </div>
       </div>

@@ -26,31 +26,30 @@ class ImageGallery extends React.Component {
 
   }
 
-  componentWillUnmount() {
-  }
-
   slideLeft() {
     const { mySwipe } = this.state;
-
     mySwipe.prev();
-
+    this.setState({ mySwipe });
   }
 
   slideRight() {
     const { mySwipe } = this.state;
-
     mySwipe.next();
+    this.setState({ mySwipe });
   }
 
   render() {
-    const { counter } = this.state;
+    const { mySwipe } = this.state;
     const { items } = this.props;
 
     const total = items.length;
+    const index = mySwipe ? mySwipe.getPos() + 1 : 1;
 
     const listItems = items.map((image, index) => {
       return (
-        <div className="image" key={index} ><img src={image} /><div className='index'>{index+1}/{total}</div></div>
+        <div className="image" key={index} >
+          <img src={image} />
+        </div>
       );
     });
 
@@ -63,8 +62,9 @@ class ImageGallery extends React.Component {
             {listItems}
           </div>
         </div>
-        <a className='image-gallery-left-nav' onTouchStart={this.slideLeft.bind(this)} onClick={this.slideLeft.bind(this)}/>
-        <a className='image-gallery-right-nav' onTouchStart={this.slideRight.bind(this)} onClick={this.slideRight.bind(this)}/>
+        <div className='index'>{index}/{total}</div>
+        <a className='image-gallery-left-nav' onTouchStart={this.slideLeft.bind(this)} onClick={this.slideLeft.bind(this)} />
+        <a className='image-gallery-right-nav' onTouchStart={this.slideRight.bind(this)} onClick={this.slideRight.bind(this)} />
       </div>
     );
   }
