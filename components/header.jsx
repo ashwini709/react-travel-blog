@@ -9,6 +9,7 @@ class Header extends React.Component {
     super(props);
 
     this.state = {
+      show: 0,
       visible: false
     };
 
@@ -32,15 +33,25 @@ class Header extends React.Component {
     } else if (window.pageYOffset <= 45 && this.state.visible) {
       this.setState({ visible: false });
     }
+
+    const index = Math.floor(window.pageYOffset / window.innerHeight);
+    if (this.state.show != index) {
+      this.setState({ show: index });
+    }
   }
 
   scrollToDay(index) {
     const height = window.innerHeight * index;
     window.scrollTo(0, height);
+    this.setState({ show: index });
   }
 
   scrollToHome() {
     window.scrollTo(0, 0);
+  }
+
+  checkActive(day) {
+    return (day == this.state.show) ? 'scroll-to-day active' : 'scroll-to-day';
   }
 
   render() {
@@ -48,15 +59,15 @@ class Header extends React.Component {
 
     return (
       <div className={classNames('header-container', { visible })}>
-        <div className='scroll-to-day' onClick={this.scrollToDay.bind(this, 0)} >HOME</div>
-        <div className='scroll-to-day' onClick={this.scrollToDay.bind(this, 1)} >DAY 1</div>
-        <div className='scroll-to-day' onClick={this.scrollToDay.bind(this, 2)} >DAY 2</div>
-        <div className='scroll-to-day' onClick={this.scrollToDay.bind(this, 3)} >DAY 3</div>
-        <div className='scroll-to-day' onClick={this.scrollToDay.bind(this, 4)} >DAY 4</div>
-        <div className='scroll-to-day' onClick={this.scrollToDay.bind(this, 5)} >DAY 5</div>
-        <div className='scroll-to-day' onClick={this.scrollToDay.bind(this, 6)} >DAY 6</div>
-        <div className='scroll-to-day' onClick={this.scrollToDay.bind(this, 7)} >DAY 7</div>
-        <div className='scroll-to-day' onClick={this.scrollToDay.bind(this, 8)} >DAY 8</div>
+        <div className={this.checkActive(0)} onClick={this.scrollToDay.bind(this, 0)} >HOME</div>
+        <div className={this.checkActive(1)} onClick={this.scrollToDay.bind(this, 1)} >DAY 1</div>
+        <div className={this.checkActive(2)} onClick={this.scrollToDay.bind(this, 2)} >DAY 2</div>
+        <div className={this.checkActive(3)} onClick={this.scrollToDay.bind(this, 3)} >DAY 3</div>
+        <div className={this.checkActive(4)} onClick={this.scrollToDay.bind(this, 4)} >DAY 4</div>
+        <div className={this.checkActive(5)} onClick={this.scrollToDay.bind(this, 5)} >DAY 5</div>
+        <div className={this.checkActive(6)} onClick={this.scrollToDay.bind(this, 6)} >DAY 6</div>
+        <div className={this.checkActive(7)} onClick={this.scrollToDay.bind(this, 7)} >DAY 7</div>
+        <div className={this.checkActive(8)} onClick={this.scrollToDay.bind(this, 8)} >DAY 8</div>
         <div className='title' onClick={this.scrollToHome.bind(this)}>NEW ZEALAND</div>
       </div>
     );

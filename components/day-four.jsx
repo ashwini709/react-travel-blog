@@ -1,12 +1,16 @@
 import React from "react";
 import ImageGallery from "./image-gallery.jsx";
+import FullItinerary from "./itinerary-link.jsx";
+import imageSet from "../data/image-set.js";
+import text from "../data/text.js";
 
 class DayFour extends React.Component {
 
   constructor(props) {
     super(props);
-
-    this.state = { height: 0 };
+    this.state = {
+      height: 0
+    };
   }
 
   componentDidMount() {
@@ -18,23 +22,18 @@ class DayFour extends React.Component {
     const { height } = this.state;
     const style = { height };
 
-    const images = [
-      "imgs/4/1.jpg",
-      "imgs/4/2.jpg",
-      "imgs/4/3.jpg",
-      "imgs/4/4.jpg"
-    ];
+    const images = imageSet['day4'];
+    const title = text['day4']['title'];
+    const description = text['day4']['description'];
 
     return (
       <div className="day-container" style={style}>
         <div className='day-background-container' />
         <div className='card-container'>
           <div className="text-container arrow-right">
-            <div className="title">Lake Taupo</div>
-            <div className="description">
-              I am Amogh Garg. I am currently living in Tokyo. I love travelling and exploring new places.
-              I also like to spend my time reading nowel or doing nothing. And yes, I am a huge 9gager.
-            </div>
+            <div className="title">{title}</div>
+            <div className="description">{description}</div>
+            <FullItinerary />
           </div>
           <div className="photo-container">
             <ImageGallery items={images} index='4' />

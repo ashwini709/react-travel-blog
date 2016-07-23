@@ -1,12 +1,16 @@
 import React from "react";
 import ImageGallery from "./image-gallery.jsx";
+import FullItinerary from "./itinerary-link.jsx";
+import imageSet from "../data/image-set.js";
+import text from "../data/text.js";
 
 class DayTwo extends React.Component {
 
   constructor(props) {
     super(props);
-
-    this.state = { height: 0 };
+    this.state = {
+      height: 0
+    };
   }
 
   componentDidMount() {
@@ -18,30 +22,17 @@ class DayTwo extends React.Component {
     const { height } = this.state;
     const style = { height };
 
-    const images = [
-      "imgs/2/1.jpg",
-      "imgs/2/2.jpg",
-      "imgs/2/3.jpg",
-      "imgs/2/4.jpg",
-      "imgs/2/5.jpg",
-      "imgs/2/6.jpg",
-      "imgs/2/7.jpg",
-      "imgs/2/8.jpg",
-      "imgs/2/9.jpg",
-      "imgs/2/10.jpg",
-      "imgs/2/11.jpg",
-      "imgs/2/12.jpg"
-    ];
+    const images = imageSet['day2'];
+    const title = text['day2']['title'];
+    const description = text['day2']['description'];
 
     return (
       <div className="day-container" style={style}>
         <div className='card-container'>
           <div className="text-container arrow-right">
-            <div className="title">Waitomo Caves</div>
-            <div className="description">
-              I am Amogh Garg. I am currently living in Tokyo. I love travelling and exploring new places.
-              I also like to spend my time reading nowel or doing nothing. And yes, I am a huge 9gager.
-            </div>
+            <div className="title">{title}</div>
+            <div className="description">{description}</div>
+            <FullItinerary />
           </div>
           <div className="photo-container">
             <ImageGallery items={images} index='2' />
