@@ -5,10 +5,8 @@ import '../styles/home.less';
 class Home extends React.Component {
 
   render() {
-    const { style } = this.props;
-
     return (
-      <div className="home-container" style={style}>
+      <div className="home-container" {...this.props} >
         <div className="background-container" />
         <div className="title-box">
           <div className="travel-year">MAY 2016</div>

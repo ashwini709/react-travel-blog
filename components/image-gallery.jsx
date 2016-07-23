@@ -1,6 +1,8 @@
 import React from "react";
 import Swipe from "swipe-js";
 
+import pageState from '../states/page.js';
+
 require('../styles/image-gallery.less');
 
 class ImageGallery extends React.Component {
@@ -12,6 +14,7 @@ class ImageGallery extends React.Component {
       mySwipe: null
     };
 
+    this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
   componentDidMount() {
@@ -24,6 +27,21 @@ class ImageGallery extends React.Component {
 
     this.setState({ mySwipe });
 
+    window.addEventListener('keydown', this.handleKeyDown);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleKeyDown);
+  }
+
+  handleKeyDown(event) {
+    const key = parseInt(event.keyCode || event.which || 0)
+
+    if (this.props.index == pageState.active.valueOf() && key == 37) {
+      this.slideLeft();
+    } else if (this.props.index == pageState.active.valueOf() && key == 39) {
+      this.slideRight();
+    }
   }
 
   slideLeft() {

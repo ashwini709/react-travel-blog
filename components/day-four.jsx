@@ -1,6 +1,7 @@
 import React from "react";
 import ImageGallery from "./image-gallery.jsx";
 import FullItinerary from "./itinerary-link.jsx";
+
 import imageSet from "../data/image-set.js";
 import text from "../data/text.js";
 

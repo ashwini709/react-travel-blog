@@ -65,12 +65,6 @@ class App extends React.Component {
   }
 }
 
-App.contextTypes = {
-  router: function () {
-    return React.PropTypes.func.isRequired;
-  }
-};
-
 export default App;
 
 

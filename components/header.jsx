@@ -2,6 +2,8 @@ import React from "react";
 import { IndexLink, Link } from 'react-router';
 import classNames from 'classnames';
 
+import pageState from '../states/page.js';
+
 import '../styles/header.less';
 
 class Header extends React.Component {
@@ -9,22 +11,30 @@ class Header extends React.Component {
     super(props);
 
     this.state = {
-      show: 0,
+      active: pageState.active.valueOf(),
       visible: false
     };
 
     this.handleScroll = this.handleScroll.bind(this);
     this.scrollToDay = this.scrollToDay.bind(this);
-    this.scrollToHome = this.scrollToHome.bind(this);
+    this.pageStateChanged = this.pageStateChanged.bind(this);
   }
 
   componentDidMount() {
+    pageState.on('readable', this.pageStateChanged);
+
     window.addEventListener('scroll', this.handleScroll);
     this.handleScroll();
   }
 
   componentWillUnmount() {
+    pageState.removeListener('readable', this.pageStateChanged);
+
     window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  pageStateChanged() {
+    this.setState({ active: pageState.active.valueOf() });
   }
 
   handleScroll() {
@@ -36,23 +46,19 @@ class Header extends React.Component {
 
     const windowInnerHeight = window.innerHeight;
     const index = Math.floor((window.pageYOffset + windowInnerHeight/2) / windowInnerHeight);
-    if (this.state.show != index) {
-      this.setState({ show: index });
+    if (pageState.active.valueOf() != index) {
+      pageState.active.assign(index);
     }
   }
 
   scrollToDay(index) {
     const height = window.innerHeight * index;
     window.scrollTo(0, height);
-    this.setState({ show: index });
-  }
-
-  scrollToHome() {
-    window.scrollTo(0, 0);
+    pageState.active.assign(index);
   }
 
   checkActive(day) {
-    return (day == this.state.show) ? 'scroll-to-day active' : 'scroll-to-day';
+    return (day == pageState.active.valueOf()) ? 'scroll-to-day active' : 'scroll-to-day';
   }
 
   render() {
@@ -69,7 +75,7 @@ class Header extends React.Component {
         <div className={this.checkActive(6)} onClick={this.scrollToDay.bind(this, 6)} >DAY 6</div>
         <div className={this.checkActive(7)} onClick={this.scrollToDay.bind(this, 7)} >DAY 7</div>
         <div className={this.checkActive(8)} onClick={this.scrollToDay.bind(this, 8)} >DAY 8</div>
-        <div className='title' onClick={this.scrollToHome.bind(this)}>NEW ZEALAND</div>
+        <div className='title' onClick={this.scrollToDay.bind(this, 0)}>NEW ZEALAND</div>
       </div>
     );
   }
