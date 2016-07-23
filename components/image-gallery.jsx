@@ -63,8 +63,14 @@ class ImageGallery extends React.Component {
           </div>
         </div>
         <div className='index'>{index}/{total}</div>
-        <a className='image-gallery-left-nav' onTouchStart={this.slideLeft.bind(this)} onClick={this.slideLeft.bind(this)} />
-        <a className='image-gallery-right-nav' onTouchStart={this.slideRight.bind(this)} onClick={this.slideRight.bind(this)} />
+
+        <a className='image-gallery-left-nav'
+          onTouchStart={this.slideLeft.bind(this)}
+          onClick={this.slideLeft.bind(this)} />
+
+        <a className='image-gallery-right-nav'
+          onTouchStart={this.slideRight.bind(this)}
+          onClick={this.slideRight.bind(this)} />
       </div>
     );
   }
