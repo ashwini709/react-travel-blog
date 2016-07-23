@@ -34,7 +34,8 @@ class Header extends React.Component {
       this.setState({ visible: false });
     }
 
-    const index = Math.floor(window.pageYOffset / window.innerHeight);
+    const windowInnerHeight = window.innerHeight;
+    const index = Math.floor((window.pageYOffset + windowInnerHeight/2) / windowInnerHeight);
     if (this.state.show != index) {
       this.setState({ show: index });
     }

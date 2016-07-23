@@ -6,28 +6,13 @@ import text from "../data/text.js";
 
 class DayOne extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      height: 0
-    };
-  }
-
-  componentDidMount() {
-    const height = window.innerHeight;
-    this.setState({ height });
-  }
-
   render() {
-    const { height } = this.state;
-    const style = { height };
-
     const images = imageSet['day1'];
     const title = text['day1']['title'];
     const description = text['day1']['description'];
 
     return (
-      <div className="day-container" style={style}>
+      <div className="day-container" {...this.props} >
         <div className='card-container'>
           <div className="photo-container">
             <ImageGallery items={images} index='1' />

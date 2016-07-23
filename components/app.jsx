@@ -18,32 +18,47 @@ class App extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = { height: 0 };
+    this.state = {
+      height: 0
+    };
+
+    this.handleResize = this.handleResize.bind(this);
   }
 
   componentDidMount() {
+    window.addEventListener('resize', this.handleResize);
+    this.handleResize();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize);
+  }
+
+  handleResize() {
     const height = window.innerHeight;
-    this.setState({ height });
+
+    if (this.state.height != height) {
+      this.setState({ height });
+    }
   }
 
   render() {
-    const { height } = this.state;
-    const style = { height };
+    const style = this.state;
 
     return (
       <div className="fake-container">
         <Header />
         <div className='app-content'>
           <div className='day-background-container' style={style} />
-          <Home />
-          <DayOne />
-          <DayTwo />
-          <DayThree />
-          <DayFour />
-          <DayFive />
-          <DaySix />
-          <DaySeven />
-          <DayEight />
+          <Home style={style} />
+          <DayOne style={style} />
+          <DayTwo style={style} />
+          <DayThree style={style} />
+          <DayFour style={style} />
+          <DayFive style={style} />
+          <DaySix style={style} />
+          <DaySeven style={style} />
+          <DayEight style={style} />
         </div>
       </div>
     );

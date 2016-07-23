@@ -4,22 +4,8 @@ import '../styles/home.less';
 
 class Home extends React.Component {
 
-  constructor(props, context) {
-    super(props, context);
-
-    this.state = {
-      height: 0
-    };
-  }
-
-  componentDidMount() {
-    const height = window.innerHeight;
-    this.setState({ height });
-  }
-
   render() {
-    const { height } = this.state;
-    const style = { height };
+    const { style } = this.props;
 
     return (
       <div className="home-container" style={style}>
