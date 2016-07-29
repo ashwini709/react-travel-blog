@@ -11,7 +11,7 @@ class ImageGallery extends React.Component {
     super(props);
 
     this.state = {
-      mySwipe: null
+      currentIndex: 1
     };
 
     this.handleKeyDown = this.handleKeyDown.bind(this);
@@ -20,14 +20,17 @@ class ImageGallery extends React.Component {
   componentDidMount() {
     const ids = 'slider' + this.props.index;
 
-    const mySwipe = Swipe(document.getElementById(ids), {
+    this.mySwipe = Swipe(document.getElementById(ids), {
       startSlide: 0,
-      speed: 400
+      speed: 400,
+      transitionEnd: this.updateCurrentIndex.bind(this)
     });
 
-    this.setState({ mySwipe });
+    const isMobile = navigator.userAgent.toLowerCase().indexOf('mobile') != -1;
 
-    window.addEventListener('keydown', this.handleKeyDown);
+    if (!isMobile) {
+      window.addEventListener('keydown', this.handleKeyDown);
+    }
   }
 
   componentWillUnmount() {
@@ -42,26 +45,25 @@ class ImageGallery extends React.Component {
     } else if (this.props.index == pageState.active.valueOf() && key == 39) {
       this.slideRight();
     }
+    this.updateCurrentIndex();
   }
 
   slideLeft() {
-    const { mySwipe } = this.state;
-    mySwipe.prev();
-    this.setState({ mySwipe });
+    this.mySwipe.prev();
   }
 
-  slideRight() {
-    const { mySwipe } = this.state;
-    mySwipe.next();
-    this.setState({ mySwipe });
+  slideRight(event) {
+    this.mySwipe.next();
+  }
+
+  updateCurrentIndex() {
+    const currentIndex = this.mySwipe ? this.mySwipe.getPos() + 1 : 1;
+    this.setState({ currentIndex });
   }
 
   render() {
-    const { mySwipe } = this.state;
+    const { currentIndex } = this.state;
     const { items } = this.props;
-
-    const total = items.length;
-    const index = mySwipe ? mySwipe.getPos() + 1 : 1;
 
     const listItems = items.map((image, index) => {
       return (
@@ -80,14 +82,12 @@ class ImageGallery extends React.Component {
             {listItems}
           </div>
         </div>
-        <div className='index'>{index}/{total}</div>
+        <div className='index'>{currentIndex}/{items.length}</div>
 
         <a className='image-gallery-left-nav'
-          onTouchStart={this.slideLeft.bind(this)}
           onClick={this.slideLeft.bind(this)} />
 
         <a className='image-gallery-right-nav'
-          onTouchStart={this.slideRight.bind(this)}
           onClick={this.slideRight.bind(this)} />
       </div>
     );
