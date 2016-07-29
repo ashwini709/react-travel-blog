@@ -253,7 +253,7 @@
 	    if (draining) {
 	        return;
 	    }
-	    var timeout = cachedSetTimeout(cleanUpNextTick);
+	    var timeout = cachedSetTimeout.call(null, cleanUpNextTick);
 	    draining = true;
 
 	    var len = queue.length;
@@ -270,7 +270,7 @@
 	    }
 	    currentQueue = null;
 	    draining = false;
-	    cachedClearTimeout(timeout);
+	    cachedClearTimeout.call(null, timeout);
 	}
 
 	process.nextTick = function (fun) {
@@ -282,7 +282,7 @@
 	    }
 	    queue.push(new Item(fun, args));
 	    if (queue.length === 1 && !draining) {
-	        cachedSetTimeout(drainQueue, 0);
+	        cachedSetTimeout.call(null, drainQueue, 0);
 	    }
 	};
 
@@ -29887,7 +29887,7 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ImageGallery).call(this, props));
 
 	    _this.state = {
-	      mySwipe: null
+	      currentIndex: 1
 	    };
 
 	    _this.handleKeyDown = _this.handleKeyDown.bind(_this);
@@ -29899,14 +29899,17 @@
 	    value: function componentDidMount() {
 	      var ids = 'slider' + this.props.index;
 
-	      var mySwipe = (0, _swipeJs2.default)(document.getElementById(ids), {
+	      this.mySwipe = (0, _swipeJs2.default)(document.getElementById(ids), {
 	        startSlide: 0,
-	        speed: 400
+	        speed: 400,
+	        transitionEnd: this.updateCurrentIndex.bind(this)
 	      });
 
-	      this.setState({ mySwipe: mySwipe });
+	      var isMobile = navigator.userAgent.toLowerCase().indexOf('mobile') != -1;
 
-	      window.addEventListener('keydown', this.handleKeyDown);
+	      if (!isMobile) {
+	        window.addEventListener('keydown', this.handleKeyDown);
+	      }
 	    }
 	  }, {
 	    key: "componentWillUnmount",
@@ -29923,32 +29926,30 @@
 	      } else if (this.props.index == _page2.default.active.valueOf() && key == 39) {
 	        this.slideRight();
 	      }
+	      this.updateCurrentIndex();
 	    }
 	  }, {
 	    key: "slideLeft",
 	    value: function slideLeft() {
-	      var mySwipe = this.state.mySwipe;
-
-	      mySwipe.prev();
-	      this.setState({ mySwipe: mySwipe });
+	      this.mySwipe.prev();
 	    }
 	  }, {
 	    key: "slideRight",
-	    value: function slideRight() {
-	      var mySwipe = this.state.mySwipe;
-
-	      mySwipe.next();
-	      this.setState({ mySwipe: mySwipe });
+	    value: function slideRight(event) {
+	      this.mySwipe.next();
+	    }
+	  }, {
+	    key: "updateCurrentIndex",
+	    value: function updateCurrentIndex() {
+	      var currentIndex = this.mySwipe ? this.mySwipe.getPos() + 1 : 1;
+	      this.setState({ currentIndex: currentIndex });
 	    }
 	  }, {
 	    key: "render",
 	    value: function render() {
-	      var mySwipe = this.state.mySwipe;
+	      var currentIndex = this.state.currentIndex;
 	      var items = this.props.items;
 
-
-	      var total = items.length;
-	      var index = mySwipe ? mySwipe.getPos() + 1 : 1;
 
 	      var listItems = items.map(function (image, index) {
 	        return _react2.default.createElement(
@@ -29975,15 +29976,13 @@
 	        _react2.default.createElement(
 	          "div",
 	          { className: "index" },
-	          index,
+	          currentIndex,
 	          "/",
-	          total
+	          items.length
 	        ),
 	        _react2.default.createElement("a", { className: "image-gallery-left-nav",
-	          onTouchStart: this.slideLeft.bind(this),
 	          onClick: this.slideLeft.bind(this) }),
 	        _react2.default.createElement("a", { className: "image-gallery-right-nav",
-	          onTouchStart: this.slideRight.bind(this),
 	          onClick: this.slideRight.bind(this) })
 	      );
 	    }
