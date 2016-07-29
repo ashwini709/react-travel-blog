@@ -19,7 +19,7 @@ export default {
     "title": "Abseiling and Milky Way!",
     "description": [
       "The Lost World. Yes that's where we rappeled on day 3. We went down into a 100m hole using just a rope. ",
-      "Just like in the movie, only safer! And that was not the best part of the day. Watching the milky way was. In a forest full of glow worms."
+      "Just like in the movies, only safer! And that was not the best part of the day. Watching the milky way was. From a forest full of glow worms."
     ]
   },
   "day4": {
