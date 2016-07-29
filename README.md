@@ -12,3 +12,7 @@ A simple one page react practice project.
 Start the development server with `npm start`
 
 then visit `http://localhost:8090`
+
+## Available at
+
+https://ashwini709.github.io/react-travel-blog/
