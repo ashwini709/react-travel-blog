@@ -1,4 +1,3 @@
-var ip = require('ip');
 var webpack = require('webpack');
 
 module.exports = {
@@ -6,14 +5,13 @@ module.exports = {
     historyApiFallback: true
   },
   entry: [
-    'webpack-dev-server/client?http://' + ip.address() + ':8090',
     './index.html',
     './index.jsx'
   ],
   output: {
     path: __dirname,
     filename: "bundle.js",
-    publicPath: "/"
+    publicPath: "/react-travel-blog/"
   },
   module: {
     loaders: [
@@ -44,7 +42,7 @@ module.exports = {
       },
       {
           test: /\.(eot|svg|ttf|woff|woff2)$/,
-          loader: 'file?name=assets/fonts/[name].[ext]'
+          loader: 'file?name=/assets/fonts/[name].[ext]'
       }
     ]
   },

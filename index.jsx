@@ -8,7 +8,7 @@ require("file!./assets/imgs/favicon-32x32.png?output=./favicon-32x32.png");
 
 var routes = (
   <Router history={browserHistory}>
-    <Route path='/' component={App}>
+    <Route path='/react-travel-blog/' component={App}>
       <IndexRoute component={Home} />
     </Route>
   </Router>
